@@ -20,6 +20,7 @@ namespace Network
         [SerializeField] private GameObject _vrView;
 
         [SerializeField] private Canvas _hostCanvas;
+        [SerializeField] private Canvas _loadingCanvas;
 
         ///  PRIVATE VARIABLES         ///
         BasicSpawnerMediator _mediator;
@@ -51,7 +52,8 @@ namespace Network
                 {
                     _hasHost = true;
                     _hostCanvas.enabled = true;
-                    _vrView.SetActive(false);   
+                    _vrView.SetActive(false); 
+                    _loadingCanvas.enabled = false;
                     /*
                     // Create a unique position for the player
                     Vector3 spawnPosition = ( new Vector3(3.61f, 11.62f, -7.68f));
@@ -64,8 +66,13 @@ namespace Network
                 }
             }
             if (runner.IsClient)
-            { 
+            {
+                _loadingCanvas.enabled = false;
+
+                _vrView.SetActive(true);
+
                 _dispalyView.SetActive(false);
+
             }
 
         }
@@ -105,18 +112,20 @@ namespace Network
         {
             if (_runner == null)
             {
-                
+
 
                 if (_mediator.IsVR())
                 {
                     _hasHost = true;
+                    _vrView.SetActive(true);
                     _dispalyView.SetActive(false);
-
                     StartGame(GameMode.Client);
 
                 }
                 else
                 {
+                    _vrView.SetActive(false);
+
                     if (GUI.Button(new Rect(0, 0, 200, 40), "Host"))
                     {
                         StartGame(GameMode.Host);
