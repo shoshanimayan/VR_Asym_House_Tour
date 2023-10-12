@@ -68,7 +68,7 @@ namespace General
 			Vector3 offset = _head.position - _origin.position;
 			offset.y = 0;
 			_origin.position = _target.position - offset;
-			_origin.parent.transform.position = _target.position - offset;
+			//_origin.parent.transform.position = _target.position - offset;
 			Vector3 targetForward = _target.forward;
 			targetForward.y = 0;
 			Vector3 cameraForwrd = _head.forward;
@@ -86,8 +86,8 @@ namespace General
             Debug.Log("teleported: "+_target.position.ToString());
             Vector3 offset = _head.position - _origin.position;
             offset.y = 0;
-            _origin.parent.transform.position = _target.position ;
-            _origin.localPosition= Vector3.zero;
+            //  _origin.parent.transform.position = _target.position ;
+            _origin.position = _target.position - offset;
 
             //_origin.parent.position=_target.position - offset;
             Vector3 targetForward = _target.forward;

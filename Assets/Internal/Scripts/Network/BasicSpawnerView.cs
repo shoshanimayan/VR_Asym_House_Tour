@@ -17,7 +17,10 @@ namespace Network
         ///  INSPECTOR VARIABLES       ///
         [SerializeField] private NetworkPrefabRef _playerPrefabVR;
         [SerializeField] private GameObject _dispalyView;
+        [SerializeField] private GameObject _vrView;
+
         [SerializeField] private Canvas _hostCanvas;
+
         ///  PRIVATE VARIABLES         ///
         BasicSpawnerMediator _mediator;
         private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
@@ -48,7 +51,7 @@ namespace Network
                 {
                     _hasHost = true;
                     _hostCanvas.enabled = true;
-
+                    _vrView.SetActive(false);   
                     /*
                     // Create a unique position for the player
                     Vector3 spawnPosition = ( new Vector3(3.61f, 11.62f, -7.68f));
